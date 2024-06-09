@@ -71,12 +71,23 @@ void loop()
     mx.setRow(6, 6, 1);
     mx.setRow(7, 7, 1);
     mx.setRow(8, 8, 1);
-   Serial.print(tm.tm_hour);
-   Serial.print(" : ");
-   Serial.print(tm.tm_min);
-   Serial.print(" : ");
-   Serial.print(tm.tm_sec);
-   Serial.println("");
+ 
+  
+   time(&now);             // Liest die aktuelle Zeit
+  localtime_r(&now, &tm); // Beschreibt tm mit der aktuelle Zeit
+  Serial.printf("%02d-%02d-%04d \t", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
+  // Serial.printf("%02d %s %04d \t", tm.tm_mday, monat[tm.tm_mon], tm.tm_year + 1900);  // Monat ausgeschrieben
+
+  Serial.print(wochentage[tm.tm_wday]);
+  // Serial.print(tm.tm_wday);         // Wochentag als Zahl, 0 = Sonntag
+  Serial.print("\tder ");
+  Serial.print(tm.tm_mday);
+  Serial.print(" " + monat[tm.tm_mon] + " ");
+  Serial.print(tm.tm_year + 1900);
+
+  Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+
     delay(100);
     mx.displayOff();
     delay(100);
