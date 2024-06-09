@@ -8,13 +8,14 @@
 
 #include "MATRIX7219.h"
 
+
 uint8_t dataPin   = D2;
 uint8_t selectPin = D3;
 uint8_t clockPin  = D4;
 uint8_t count     = 1;
 
 MATRIX7219 mx(dataPin, selectPin, clockPin, count);
-
+#include "show.h"
 
 void setup()
 {
@@ -26,18 +27,21 @@ void setup()
 
   mx.begin();
   mx.clear();
-  mx.setBrightness(3);
+  mx.setBrightness(10);
   mx.setReverse(true);
+
+  show();
+
 }
 
 
 void loop()
 {
  
-    mx.setRow(1, 1, 1);
-    mx.setRow(2, 2, 1);
-    mx.setRow(3, 3, 1);
-    mx.setRow(4, 4, 1);
+    mx.setRow(1, 15, 1);
+    mx.setRow(2, 240, 1);
+    mx.setRow(3, 255, 1);
+    mx.setRow(4, 14, 1);
     mx.setRow(5, 5, 1);
     mx.setRow(6, 6, 1);
     mx.setRow(7, 7, 1);
