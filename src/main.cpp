@@ -1,19 +1,22 @@
 #include <Arduino.h>
-#include <MATRIX7219.h>
 #include <WiFiManager.h>
 #include <time.h>
+#include "LedControl.h"
 
 //
 //    FILE: MINI WordClock
 //  AUTHOR: Thomas KLapper
 // PURPOSE: WordClock, using MAX 7219, 8x8 LED Matrix
 //     URL: https://github.com/ThomasKlap/MINIWordClock
-
-uint8_t dataPin   = D2;
-uint8_t selectPin = D3;
-uint8_t clockPin  = D4;
-uint8_t count     = 1;
-MATRIX7219 mx(dataPin, selectPin, clockPin, count);
+/*
+ Now we need a LedControl to work with.
+ ***** These pin numbers will probably not work with your hardware *****
+ pin D2 is connected to the DataIn 
+ pin D4 is connected to the CLK 
+ pin D3 is connected to LOAD 
+ We have only a single MAX72XX.
+*/
+LedControl lc=LedControl(D2,D4,D3,1);
 
 int lastMilis;
 int temp;
@@ -32,10 +35,15 @@ tm tm;
 
 void matrix_start()
 {
-  mx.begin();
-  mx.clear();
-  mx.setBrightness(10);
-  mx.setReverse(true);
+  /*
+   The MAX72XX is in power-saving mode on startup,
+   we have to do a wakeup call
+   */
+  lc.shutdown(0,false);
+  /* Set the brightness to a medium values */
+  lc.setIntensity(0,8);
+  /* and clear the display */
+  lc.clearDisplay(0);
 }
 
 
@@ -44,146 +52,146 @@ void matrix_out()
 
 
 if (secounds == 0) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Null");
 }
 else if (secounds == 1) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 15, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 15, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Eins");
 }
 else if (secounds == 2) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 3, 1);
-    mx.setRow(5, 3, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 3, 1);
+    lc.setRow(5, 3, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Zwei");
 }
 else if (secounds == 3) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 240, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 240, 1);
     Serial.println("Drei");
 }
 else if (secounds == 4) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 240, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 240, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Vier");
 }
 else if (secounds == 5) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 240, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 240, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Fünfl");
 }
 else if (secounds == 6) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 248, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 248, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Sechs");
 }
 else if (secounds == 7) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 126, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 126, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Sieben");
 }
 else if (secounds == 8) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 15, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 15, 1);
     Serial.println("Acht");
 }
 else if (secounds == 9) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 240, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 240, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Neun");
 }
 else if (secounds == 10) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 30, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 30, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Zehn");
 }
 else if (secounds == 11) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 0, 1);
-    mx.setRow(5, 1, 1);
-    mx.setRow(6, 1, 1);
-    mx.setRow(7, 1, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 0, 1);
+    lc.setRow(5, 1, 1);
+    lc.setRow(6, 1, 1);
+    lc.setRow(7, 1, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Elf");
 }
 else if (secounds == 12) {
-    mx.setRow(1, 0, 1);
-    mx.setRow(2, 0, 1);
-    mx.setRow(3, 0, 1);
-    mx.setRow(4, 31, 1);
-    mx.setRow(5, 0, 1);
-    mx.setRow(6, 0, 1);
-    mx.setRow(7, 0, 1);
-    mx.setRow(8, 0, 1);
+    lc.setRow(1, 0, 1);
+    lc.setRow(2, 0, 1);
+    lc.setRow(3, 0, 1);
+    lc.setRow(4, 31, 1);
+    lc.setRow(5, 0, 1);
+    lc.setRow(6, 0, 1);
+    lc.setRow(7, 0, 1);
+    lc.setRow(8, 0, 1);
     Serial.println("Zwölf");
 }
 else { Serial.println("Mehr als Zwölf");}
