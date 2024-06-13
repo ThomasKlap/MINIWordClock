@@ -11,12 +11,12 @@
 /*
  Now we need a LedControl to work with.
  ***** These pin numbers will probably not work with your hardware *****
- pin D2 is connected to the DataIn 
- pin D4 is connected to the CLK 
- pin D3 is connected to LOAD 
+ pin D2/GPIO4 is connected to the DataIn 
+ pin D4/GPIO2 is connected to the CLK 
+ pin D3/GPIO0 is connected to LOAD 
  We have only a single MAX72XX.
 */
-LedControl lc=LedControl(D2,D4,D3,1);
+LedControl lc=LedControl(4,0,2,1);
 
 int lastMilis;
 int temp;
@@ -51,7 +51,7 @@ void matrix_out()
 {
 
 
-if (secounds == 0) {
+if (hours == 0) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -62,7 +62,7 @@ if (secounds == 0) {
     lc.setRow(8, 0, 1);
     Serial.println("Null");
 }
-else if (secounds == 1) {
+else if (hours == 1) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -73,7 +73,7 @@ else if (secounds == 1) {
     lc.setRow(8, 0, 1);
     Serial.println("Eins");
 }
-else if (secounds == 2) {
+else if (hours == 2) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -84,7 +84,7 @@ else if (secounds == 2) {
     lc.setRow(8, 0, 1);
     Serial.println("Zwei");
 }
-else if (secounds == 3) {
+else if (hours == 3) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -95,7 +95,7 @@ else if (secounds == 3) {
     lc.setRow(8, 240, 1);
     Serial.println("Drei");
 }
-else if (secounds == 4) {
+else if (hours == 4) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 240, 1);
@@ -106,7 +106,7 @@ else if (secounds == 4) {
     lc.setRow(8, 0, 1);
     Serial.println("Vier");
 }
-else if (secounds == 5) {
+else if (hours == 5) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -117,7 +117,7 @@ else if (secounds == 5) {
     lc.setRow(8, 0, 1);
     Serial.println("Fünfl");
 }
-else if (secounds == 6) {
+else if (hours == 6) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -128,7 +128,7 @@ else if (secounds == 6) {
     lc.setRow(8, 0, 1);
     Serial.println("Sechs");
 }
-else if (secounds == 7) {
+else if (hours == 7) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -139,7 +139,7 @@ else if (secounds == 7) {
     lc.setRow(8, 0, 1);
     Serial.println("Sieben");
 }
-else if (secounds == 8) {
+else if (hours == 8) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -150,7 +150,7 @@ else if (secounds == 8) {
     lc.setRow(8, 15, 1);
     Serial.println("Acht");
 }
-else if (secounds == 9) {
+else if (hours == 9) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -161,7 +161,7 @@ else if (secounds == 9) {
     lc.setRow(8, 0, 1);
     Serial.println("Neun");
 }
-else if (secounds == 10) {
+else if (hours == 10) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -172,7 +172,7 @@ else if (secounds == 10) {
     lc.setRow(8, 0, 1);
     Serial.println("Zehn");
 }
-else if (secounds == 11) {
+else if (hours == 11) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -183,7 +183,7 @@ else if (secounds == 11) {
     lc.setRow(8, 0, 1);
     Serial.println("Elf");
 }
-else if (secounds == 12) {
+else if (hours == 12) {
     lc.setRow(1, 0, 1);
     lc.setRow(2, 0, 1);
     lc.setRow(3, 0, 1);
@@ -239,8 +239,13 @@ void loop()
 
   //Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
   secounds =  tm.tm_sec;
+  minutes =  tm.tm_min;
+  hours =  tm.tm_hour/12;
+  Serial.print(tm.tm_hour);
+  Serial.print(" : ");
+  Serial.print(tm.tm_min);
+  Serial.print(" : ");  
   Serial.println(tm.tm_sec);
-  Serial.println(secounds);
     delay(100);
     matrix_out();
 } 
