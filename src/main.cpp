@@ -29,6 +29,7 @@ int temp;
 int secounds;
 int minutes;
 int hours;
+int temp_hours;
 unsigned long CycleMillis = 0; // speichert den Zeitpunkt des Letzten Zyklus
 const char *NTP_SERVER = "de.pool.ntp.org";
 const char *TZ_INFO = "CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00";
@@ -89,11 +90,207 @@ void matrix_start()
   lc.clearDisplay(0);
 }
 
+void text_fuenf1() {
+  lc.setLed(0, 0, 0, 1);
+  lc.setLed(0, 0, 1, 1);
+  lc.setLed(0, 0, 2, 1);
+  lc.setLed(0, 0, 3, 1);
+  Serial.print(" Fünf ");  
+}
+void text_zehn1() {
+  lc.setLed(0, 0, 4, 1);
+  lc.setLed(0, 0, 5, 1);
+  lc.setLed(0, 0, 6, 1);
+  lc.setLed(0, 0, 7, 1);
+  Serial.print(" Zehn ");  
+}
+void text_vor() {
+  lc.setLed(0, 1, 0, 1);
+  lc.setLed(0, 1, 1, 1);
+  lc.setLed(0, 1, 2, 1);
+  Serial.print(" vor ");  
+}
+void text_nach() {
+  lc.setLed(0, 1, 4, 1);
+  lc.setLed(0, 1, 5, 1);
+  lc.setLed(0, 1, 6, 1);
+  lc.setLed(0, 1, 7, 1);
+  Serial.print(" nach "); 
+}
+void text_halb() {
+  lc.setLed(0, 2, 0, 1);
+  lc.setLed(0, 2, 1, 1);
+  lc.setLed(0, 2, 2, 1);
+  lc.setLed(0, 2, 3, 1);
+  Serial.print(" halb "); 
+}
+void text_eins() {
+  lc.setLed(0, 4, 0, 1);
+  lc.setLed(0, 4, 1, 1);
+  lc.setLed(0, 4, 2, 1);
+  lc.setLed(0, 4, 3, 1);
+  Serial.print(" Eins "); 
+}
+void text_zwei() {
+  lc.setLed(0, 3, 0, 1);
+  lc.setLed(0, 3, 1, 1);
+  lc.setLed(0, 4, 0, 1);
+  lc.setLed(0, 4, 1, 1);
+  Serial.print(" Zwei "); 
+}
+void text_drei() {
+  lc.setLed(0, 7, 4, 1);
+  lc.setLed(0, 7, 5, 1);
+  lc.setLed(0, 7, 6, 1);
+  lc.setLed(0, 7, 7, 1);
+  Serial.print(" Drei "); 
+}
+void text_vier() {
+  lc.setLed(0, 2, 4, 1);
+  lc.setLed(0, 2, 5, 1);
+  lc.setLed(0, 2, 6, 1);
+  lc.setLed(0, 2, 7, 1);
+  Serial.print(" Vier "); 
+}
+void text_fuenf() {
+  lc.setLed(0, 3, 4, 1);
+  lc.setLed(0, 3, 5, 1);
+  lc.setLed(0, 3, 6, 1);
+  lc.setLed(0, 3, 7, 1);
+  Serial.print(" Fünf "); 
+}
+void text_sechs() {
+  lc.setLed(0, 4, 3, 1);
+  lc.setLed(0, 4, 4, 1);
+  lc.setLed(0, 4, 5, 1);
+  lc.setLed(0, 4, 6, 1);
+  lc.setLed(0, 4, 7, 1);
+  Serial.print(" Sechs "); 
+}
+void text_sieben() {
+  lc.setLed(0, 6, 1, 1);
+  lc.setLed(0, 6, 2, 1);
+  lc.setLed(0, 6, 3, 1);
+  lc.setLed(0, 6, 4, 1);
+  lc.setLed(0, 6, 5, 1);
+  lc.setLed(0, 6, 6, 1);
+  Serial.print(" Sieben "); 
+}
+void text_acht() {
+  lc.setLed(0, 7, 0, 1);
+  lc.setLed(0, 7, 1, 1);
+  lc.setLed(0, 7, 2, 1);
+  lc.setLed(0, 7, 3, 1);
+  Serial.print(" Acht "); 
+}
+void text_neun() {
+  lc.setLed(0, 5, 4, 1);
+  lc.setLed(0, 5, 5, 1);
+  lc.setLed(0, 5, 6, 1);
+  lc.setLed(0, 5, 7, 1);
+  Serial.print(" Neun "); 
+}
+void text_zehn() {
+  lc.setLed(0, 5, 1, 1);
+  lc.setLed(0, 5, 2, 1);
+  lc.setLed(0, 5, 3, 1);
+  lc.setLed(0, 5, 4, 1);
+  Serial.print(" Zehn "); 
+}
+void text_elf() {
+  lc.setLed(0, 4, 0, 1);
+  lc.setLed(0, 5, 0, 1);
+  lc.setLed(0, 6, 0, 1);
+  Serial.print(" Elf "); 
+}
+void text_zwoelf() {
+  lc.setLed(0, 3, 1, 1);
+  lc.setLed(0, 3, 2, 1);
+  lc.setLed(0, 3, 3, 1);
+  lc.setLed(0, 3, 4, 1);
+  lc.setLed(0, 3, 5, 1);
+  Serial.print(" Zwölf "); 
+}   
 
-void matrix_out()
+void matrix_out() {
+    lc.clearDisplay(0); // clear all pixels
+
+    if ((minutes >= 3 && minutes < 8) || (minutes >= 33 && minutes < 38)) {
+    text_fuenf1();
+    text_nach();
+  } else if ((minutes >= 8 && minutes < 13) || (minutes >= 38 && minutes < 43)) {
+    text_zehn1();
+    text_nach();
+  } else if (minutes >= 13 && minutes < 18) {
+    text_fuenf1();
+    text_zehn1();
+    text_nach();
+  } else if (minutes >= 43 && minutes < 48) {
+    text_fuenf1();
+    text_zehn1();
+    text_vor();
+  } else if ((minutes >= 23 && minutes < 28) || (minutes >= 53&& minutes < 58)) {
+    text_fuenf1();
+    text_vor();
+  } else if ((minutes >= 48 && minutes < 53) || (minutes >= 18 && minutes < 23)) {
+    text_zehn1();
+    text_vor();
+  }
+  
+  if (minutes >= 18 && minutes < 43) {
+    text_halb();
+  }
+
+  if (minutes<18){
+    temp_hours=hours;
+  } else {
+    temp_hours=hours+1;
+  }
+      switch (temp_hours) {
+      case 0:
+      case 12:
+        text_zwoelf();
+        break;
+      case 1:
+        text_eins();
+        break;
+      case 2:
+        text_zwei();
+        break;
+      case 3:
+        text_drei();
+        break;
+      case 4:
+        text_vier();
+        break;
+      case 5:
+        text_fuenf();
+        break;
+      case 6:
+        text_sechs();
+        break;
+      case 7:
+        text_sieben();
+        break;
+      case 8:
+        text_acht();
+        break;
+      case 9:
+        text_neun();
+        break;
+      case 10:
+        text_zehn();
+        break;
+      case 11:
+        text_elf();
+        break;
+    }
+
+  }
+
+void matrix_out_1()
 {
-
-
+lc.clearDisplay(0); // clear all pixels
 if (hours == 0) {
     lc.setRow(0,0,B00000000);
     lc.setRow(0,1,B00000000);
@@ -268,17 +465,7 @@ void loop()
 {
   time(&now);             // Liest die aktuelle Zeit
   localtime_r(&now, &tm); // Beschreibt tm mit der aktuelle Zeit
-  // Serial.printf("%02d-%02d-%04d \t", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
-  // Serial.printf("%02d %s %04d \t", tm.tm_mday, monat[tm.tm_mon], tm.tm_year + 1900);  // Monat ausgeschrieben
-
-  // Serial.print(wochentage[tm.tm_wday]);
-  // Serial.print(tm.tm_wday);         // Wochentag als Zahl, 0 = Sonntag
-  //Serial.print("\tder ");
-  //Serial.print(tm.tm_mday);
-  //Serial.print(" " + monat[tm.tm_mon] + " ");
-  //Serial.print(tm.tm_year + 1900);
-
-  //Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
+  
   secounds =  tm.tm_sec;
   minutes =  tm.tm_min;
   hours =  tm.tm_hour ;
