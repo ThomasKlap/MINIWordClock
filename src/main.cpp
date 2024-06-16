@@ -16,8 +16,14 @@
  pin D3/GPIO0 is connected to LOAD 
  We have only a single MAX72XX.
 */
-LedControl lc=LedControl(4,0,2,1);
 
+#define DIN_PIN D6  //pin D8
+#define CS_PIN  D7  //pin D7
+#define CLK_PIN D8  //pin D6
+
+
+// LedControl lc = LedControl(DIN_PIN, CLK_PIN, CS_PIN, 1);
+LedControl lc=LedControl(D6,D7,D8,1);
 int lastMilis;
 int temp;
 int secounds;
@@ -44,6 +50,43 @@ void matrix_start()
   lc.setIntensity(0,8);
   /* and clear the display */
   lc.clearDisplay(0);
+  lc.setRow(0,0,B10101010); 
+  lc.setRow(0,1,B01010101);
+  lc.setRow(0,2,B10101010); 
+  lc.setRow(0,3,B01010101);
+  lc.setRow(0,4,B10101010); 
+  lc.setRow(0,5,B01010101);
+  lc.setRow(0,6,B10101010); 
+  lc.setRow(0,7,B01010101);
+  delay(200);
+  lc.setRow(0,0,B01010101);
+  lc.setRow(0,1,B10101010); 
+  lc.setRow(0,2,B01010101);
+  lc.setRow(0,3,B10101010); 
+  lc.setRow(0,4,B01010101);
+  lc.setRow(0,5,B10101010); 
+  lc.setRow(0,6,B01010101);
+  lc.setRow(0,7,B10101010);
+  delay(200); 
+  lc.setRow(0,0,B10101010); 
+  lc.setRow(0,1,B01010101);
+  lc.setRow(0,2,B10101010); 
+  lc.setRow(0,3,B01010101);
+  lc.setRow(0,4,B10101010); 
+  lc.setRow(0,5,B01010101);
+  lc.setRow(0,6,B10101010); 
+  lc.setRow(0,7,B01010101);
+  delay(200);
+  lc.setRow(0,0,B01010101);
+  lc.setRow(0,1,B10101010); 
+  lc.setRow(0,2,B01010101);
+  lc.setRow(0,3,B10101010); 
+  lc.setRow(0,4,B01010101);
+  lc.setRow(0,5,B10101010); 
+  lc.setRow(0,6,B01010101);
+  lc.setRow(0,7,B10101010);
+  delay(200); 
+  lc.clearDisplay(0);
 }
 
 
@@ -52,146 +95,147 @@ void matrix_out()
 
 
 if (hours == 0) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B11110000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Null");
 }
 else if (hours == 1) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 15, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B11110000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Eins");
 }
 else if (hours == 2) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 3, 1);
-    lc.setRow(5, 3, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B11000000);
+    lc.setRow(0,4,B11000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Zwei");
 }
 else if (hours == 3) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 240, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00001111);
     Serial.println("Drei");
 }
 else if (hours == 4) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 240, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00001111);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Vier");
 }
 else if (hours == 5) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 240, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00001111);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Fünfl");
 }
 else if (hours == 6) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 248, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00011111);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Sechs");
 }
 else if (hours == 7) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 126, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B01111110);
+    lc.setRow(0,7,B00000000);
     Serial.println("Sieben");
 }
 else if (hours == 8) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 15, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B11110000);
     Serial.println("Acht");
 }
 else if (hours == 9) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 240, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00001111);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Neun");
 }
 else if (hours == 10) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 30, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B01111000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Zehn");
 }
 else if (hours == 11) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 0, 1);
-    lc.setRow(5, 1, 1);
-    lc.setRow(6, 1, 1);
-    lc.setRow(7, 1, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B00000000);
+    lc.setRow(0,4,B10000000);
+    lc.setRow(0,5,B10000000);
+    lc.setRow(0,6,B10000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Elf");
 }
 else if (hours == 12) {
-    lc.setRow(1, 0, 1);
-    lc.setRow(2, 0, 1);
-    lc.setRow(3, 0, 1);
-    lc.setRow(4, 31, 1);
-    lc.setRow(5, 0, 1);
-    lc.setRow(6, 0, 1);
-    lc.setRow(7, 0, 1);
-    lc.setRow(8, 0, 1);
+    lc.setRow(0,0,B00000000);
+    lc.setRow(0,1,B00000000);
+    lc.setRow(0,2,B00000000);
+    lc.setRow(0,3,B11110000);
+    lc.setRow(0,4,B00000000);
+    lc.setRow(0,5,B00000000);
+    lc.setRow(0,6,B00000000);
+    lc.setRow(0,7,B00000000);
     Serial.println("Zwölf");
 }
 else { Serial.println("Mehr als Zwölf");}
@@ -201,7 +245,6 @@ else { Serial.println("Mehr als Zwölf");}
 void setup()
 {
   Serial.begin(115200);
-  
   WiFiManager wm;
   bool res;
   res = wm.autoConnect("MiniWordClock", "123456789"); // password protected ap
@@ -215,11 +258,9 @@ void setup()
     // if you get here you have connected to the WiFi
     Serial.println("connected...yeey :)");
   }
-
   configTime(0, 0, NTP_SERVER);
   setenv("TZ", TZ_INFO, 1);
-
-matrix_start();
+  matrix_start(); // start the LED Matrix Driver and run test-screens
  }
 
 
@@ -240,13 +281,15 @@ void loop()
   //Serial.printf(" \tUhrzeit: %02d:%02d:%02d \n", tm.tm_hour, tm.tm_min, tm.tm_sec);
   secounds =  tm.tm_sec;
   minutes =  tm.tm_min;
-  hours =  tm.tm_hour/12;
+  hours =  tm.tm_hour ;
+  if (hours>=12) hours-=12;
+
   Serial.print(tm.tm_hour);
   Serial.print(" : ");
   Serial.print(tm.tm_min);
   Serial.print(" : ");  
   Serial.println(tm.tm_sec);
-    delay(100);
+    delay(500);
     matrix_out();
 } 
 
