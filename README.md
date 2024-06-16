@@ -1,5 +1,5 @@
 # MINI-Word Clock, by Thomas Klapper
-
+![WordClock](/parts/clock.jpg)
 WordClock, german language using Wemos D1 mini and MAX7219 driven 8x8 LED Dot-Matrix
 -WLAN AP configuration portal
 -automatic NTP Time syn after succesfull WLAN connection
