@@ -22,8 +22,8 @@
 #define CLK_PIN D8  //pin D6
 
 
-// LedControl lc = LedControl(DIN_PIN, CLK_PIN, CS_PIN, 1);
-LedControl lc=LedControl(D6,D7,D8,1);
+LedControl lc = LedControl(DIN_PIN, CLK_PIN, CS_PIN, 1);
+// LedControl lc=LedControl(D6,D8,D7,1);
 int lastMilis;
 int temp;
 int secounds;
